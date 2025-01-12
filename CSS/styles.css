@@ -1,0 +1,86 @@
+@import url('main.css');
+@import url('fonts.css');
+@import url('feedback.css');
+/*@import url('checkbox.css');*/
+@import url('accordion.css');
+@import url('carousel.css');
+@import url('card.css');
+@import url('btn.css');
+@import url('a_link.css');
+@import url('sparkle.css');
+@import url('footer.css');
+@import url('pulse.css');
+
+@keyframes gradientBackground
+{
+    0% 
+    {
+      background-position: 0% 50%;
+    }
+
+    50% 
+    {
+      background-position: 100% 50%;
+    }
+
+    100% 
+    {
+      background-position: 0% 50%;
+    }
+}
+
+@keyframes shine-bg 
+{
+    0% 
+    {
+        left: -100%;
+    }
+
+    50% 
+    {
+        left: 100%;
+    }
+
+    100% 
+    {
+        left: 100%;
+    }
+}
+
+@keyframes spin
+ {
+    0%
+    {
+        transform: rotate(0deg);
+    }
+    100% 
+    {
+        transform: rotate(360deg);
+    }
+}
+
+.container_black {
+    display: flex;
+    justify-content: center;
+    margin-top: 4em;
+    padding: 1em;
+    background-color: rgb(32, 32, 32);
+    border-radius: 0.625em;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.navbar-nav 
+{ 
+    margin-left: auto; 
+}
+
+.nav-link:hover
+{
+    background-color: rgba(172, 172, 172, 0.192);
+}
+
+:focus
+{
+    outline: 0 !important;
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0) !important;
+}
