@@ -24,6 +24,71 @@
 </script>
 <noscript><div><img src="https://mc.yandex.ru/watch/99514950" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
+ <script>
+    // Функция для отслеживания событий покупки
+    function trackPurchaseClick(productName, price) {
+        // Отправка события в Яндекс.Метрику
+        ym(99514950, 'reachGoal', 'PURCHASE_CLICK', {
+            'product': productName,
+            'price': price
+        });
+        
+        // Показ формы заявки
+        showPurchaseForm(productName, price);
+    }
+
+    // Функция для показа формы заявки
+    function showPurchaseForm(productName, price) {
+        const form = document.createElement('div');
+        form.className = 'purchase-form';
+        form.innerHTML = `
+            <div class="modal fade" id="purchaseModal" tabindex="-1" aria-labelledby="purchaseModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="purchaseModalLabel">Оформление заказа: ${productName}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="orderForm" onsubmit="submitOrder(event, '${productName}', ${price})">
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Ваше имя</label>
+                                    <input type="text" class="form-control" id="name" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="phone" class="form-label">Телефон</label>
+                                    <input type="tel" class="form-control" id="phone" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Оформить заказ</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(form);
+        
+        // Показываем модальное окно
+        new bootstrap.Modal(document.getElementById('purchaseModal')).show();
+    }
+
+    // Функция отправки заказа
+    function submitOrder(event, productName, price) {
+        event.preventDefault();
+        
+        // Отправка события успешного оформления заказа в Яндекс.Метрику
+        ym(99514950, 'reachGoal', 'ORDER_SUBMITTED', {
+            'product': productName,
+            'price': price,
+            'name': document.getElementById('name').value
+        });
+
+        // Здесь можно добавить логику отправки заказа на сервер
+
+        // Перенаправление на страницу благодарности
+        window.location.href = 'thank-you.html';
+    }
+    </script>
 </head>
 <body>
     <header class="text-center" style="display: flex; justify-content: center; align-items: flex-start;">
@@ -59,7 +124,7 @@
 <div class="container mt-4">
     <div class="row justify-content-center">
         <div class="col-md-4">
-            <div class="card clickable-card" onclick="alert('Функция пока недоступна')">
+            <div class="card clickable-card" onclick="trackPurchaseClick('Футболка Iron pulse', 999)">
                 <h5 class="card-title">Футболка с принтом "Iron pulse"</h5>
                 <div class="card-body">
                     <img src="../../Res/Img/Products/Printed T-shirt.png" class="card-img-top" style="height: 18.75em;" alt="Product 1">
@@ -75,7 +140,7 @@
             </div>
         </div>
         <div class="col-md-4">
-            <div class="card clickable-card" onclick="alert('Функция пока недоступна')">
+            <div class="card clickable-card" onclick="trackPurchaseClick('Футболка Iron pulse', 999)">
                 <h5 class="card-title">Гантели черные по 30 кг</h5>
                 <div class="card-body">
                     <img src="../../Res/Img/Products/Dumbbells.png" class="card-img-top" style="height: 18.75em;" alt="Product 2">
@@ -90,7 +155,7 @@
             </div>
         </div>
         <div class="col-md-4">
-            <div class="card clickable-card" onclick="alert('Функция пока недоступна')">
+            <div class="card clickable-card" onclick="trackPurchaseClick('Футболка Iron pulse', 999)">
                 <h5 class="card-title">Bpi Sports протеин</h5>
                 <div class="card-body">
                     <img src="../../Res/Img/Products/BPI Sports protein.png" class="card-img-top" style="height: 18.75em;" alt="Product 3">
